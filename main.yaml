@@ -1,6 +1,6 @@
 - name: Setup Nginx
   hosts: web
-  connection: local
+  connection: yes
   tasks:
     - name: Install nginx
       ansible.builtin.package:
