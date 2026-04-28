@@ -1,0 +1,19 @@
+- name: Setup Nginx
+  hosts: web
+  become: yes
+  tasks:
+    - name: Install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present
+
+    - name: Start nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy app file
+      ansible.builtin.copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
