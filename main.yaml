@@ -1,5 +1,5 @@
 - name: Setup Nginx
-  hosts: web
+  hosts: local
   become: yes
   tasks:
     - name: Install nginx
