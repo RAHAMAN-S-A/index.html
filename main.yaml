@@ -18,3 +18,9 @@
       ansible.builtin.copy:
         src: index.html
         dest: /usr/share/nginx/html/index.html
+
+    - name: reStart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: yes
