@@ -1,3 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Sadiqa ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.box {
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 80%;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #ff4d6d;
+  color: white;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* floating hearts */
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh); opacity: 0;}
+  50% {opacity: 1;}
+  100% {transform: translateY(-10vh); opacity: 0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Hey Sadiqa… ❤️</h2>
+  <p>Type my name 😊</p>
+
+  <input type="text" id="name">
+  <br><br>
+
+  <button onclick="start()">Reveal</button>
+
+  <div id="message"></div>
+</div>
+
+<!-- background music -->
+<audio id="bgm" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 function start() {
   let input = document.getElementById("name").value.toLowerCase();
@@ -7,7 +91,7 @@ function start() {
     document.body.style.background =
     "url('https://images.unsplash.com/photo-1518199266791-5375a83190b7') no-repeat center/cover";
 
-    document.getElementById("music").style.display = "block";
+    document.getElementById("bgm").play();
 
     setInterval(createHeart, 500);
 
@@ -68,3 +152,6 @@ function createHeart() {
   }, 5000);
 }
 </script>
+
+</body>
+</html>
