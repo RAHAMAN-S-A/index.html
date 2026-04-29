@@ -1,12 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>My App</title>
-</head>
-<body style="background-color: lightblue; text-align: center;">
+<script>
+function start() {
+  let input = document.getElementById("name").value.toLowerCase();
 
-  <h1 style="color: darkblue;">I Love DevOps ❤️</h1>
+  if (input === "rahaman") {
 
-</body>
-</html>
+    document.body.style.background =
+    "url('https://images.unsplash.com/photo-1518199266791-5375a83190b7') no-repeat center/cover";
+
+    document.getElementById("music").style.display = "block";
+
+    setInterval(createHeart, 500);
+
+    let msgBox = document.getElementById("message");
+
+    let messages = [
+      "Sadiqa… ❤️",
+      "I don’t know when it started…",
+      "But you became my favorite person 🥺",
+      "I love you so much ❤️",
+      "I need you in my life forever 💫",
+      "Not perfect… just you ❤️"
+    ];
+
+    let i = 0;
+
+    function typeMessage(text, callback) {
+      let index = 0;
+      let line = document.createElement("div");
+      msgBox.appendChild(line);
+
+      let typing = setInterval(() => {
+        line.innerHTML += text.charAt(index);
+        index++;
+        if (index === text.length) {
+          clearInterval(typing);
+          setTimeout(callback, 800);
+        }
+      }, 50);
+    }
+
+    function showNext() {
+      if (i < messages.length) {
+        typeMessage(messages[i], () => {
+          i++;
+          showNext();
+        });
+      }
+    }
+
+    showNext();
+
+  } else {
+    alert("Hmm… that’s not right 😊 try again");
+  }
+}
+
+function createHeart() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+</script>
