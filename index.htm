@@ -11,11 +11,50 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* PASSWORD SCREEN */
+#lockScreen {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #0b141a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
+#lockScreen input {
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+#lockScreen button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #25d366;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* CHAT UI */
 .chat-container {
   max-width: 400px;
   margin: auto;
   height: 100vh;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 
@@ -63,7 +102,19 @@ body {
 
 <body>
 
-<div class="chat-container">
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen">
+  <h2>Enter Password ❤️</h2>
+
+  <input type="password" id="password" placeholder="Enter password">
+
+  <button onclick="checkPassword()">Unlock</button>
+
+  <div class="error" id="error"></div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-container" id="chatContainer">
   <div class="header">Sadiqa ❤️</div>
 
   <div class="chat-box" id="chat"></div>
@@ -75,6 +126,27 @@ body {
 </audio>
 
 <script>
+
+function checkPassword() {
+
+  let pass = document.getElementById("password").value;
+
+  if(pass === "8143313638") {
+
+    document.getElementById("lockScreen").style.display = "none";
+
+    document.getElementById("chatContainer").style.display = "flex";
+
+    document.getElementById("bgm").play();
+
+    showMessage();
+
+  } else {
+
+    document.getElementById("error").innerHTML = "Wrong Password ❌";
+  }
+}
+
 let chat = document.getElementById("chat");
 let typing = document.getElementById("typing");
 
@@ -92,31 +164,32 @@ let messages = [
 let i = 0;
 
 function showMessage() {
+
   if (i < messages.length) {
 
     typing.innerHTML = "typing...";
 
     setTimeout(() => {
+
       typing.innerHTML = "";
 
       let msg = document.createElement("div");
+
       msg.className = "message " + messages[i].type;
+
       msg.innerHTML = messages[i].text;
 
       chat.appendChild(msg);
+
       chat.scrollTop = chat.scrollHeight;
 
       i++;
+
       showMessage();
+
     }, 1500);
   }
 }
-
-// start after click (for music autoplay)
-document.body.addEventListener("click", function() {
-  document.getElementById("bgm").play();
-  showMessage();
-}, { once: true });
 
 </script>
 
