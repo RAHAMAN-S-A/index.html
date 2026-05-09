@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Sadiqa ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  background: #0b141a;
+  font-family: Arial, sans-serif;
+}
+
+.chat-container {
+  max-width: 400px;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #075e54;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #ece5dd;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  position: relative;
+}
+
+.sent {
+  background: #dcf8c6;
+  margin-left: auto;
+}
+
+.received {
+  background: white;
+  margin-right: auto;
+}
+
+.typing {
+  font-style: italic;
+  font-size: 12px;
+  margin-left: 10px;
+  color: gray;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+  <div class="header">Sadiqa ❤️</div>
+
+  <div class="chat-box" id="chat"></div>
+  <div class="typing" id="typing"></div>
+</div>
+
+<audio id="bgm" loop>
+  <source src="TumHiHo.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let chat = document.getElementById("chat");
+let typing = document.getElementById("typing");
+
+let messages = [
+  { text: "Hey Sadiqa… ❤️", type: "sent" },
+  { text: "I was thinking about us today…", type: "sent" },
+  { text: "9 years… can you believe it? 🥺", type: "sent" },
+  { text: "We’ve been through so much together…", type: "sent" },
+  { text: "And still… you are my favorite person ❤️", type: "sent" },
+  { text: "I don’t say this everyday…", type: "sent" },
+  { text: "But I really love you so much ❤️", type: "sent" },
+  { text: "And I always will… 💫", type: "sent" }
+];
+
+let i = 0;
+
+function showMessage() {
+  if (i < messages.length) {
+
+    typing.innerHTML = "typing...";
+
+    setTimeout(() => {
+      typing.innerHTML = "";
+
+      let msg = document.createElement("div");
+      msg.className = "message " + messages[i].type;
+      msg.innerHTML = messages[i].text;
+
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+
+      i++;
+      showMessage();
+    }, 1500);
+  }
+}
+
+// start after click (for music autoplay)
+document.body.addEventListener("click", function() {
+  document.getElementById("bgm").play();
+  showMessage();
+}, { once: true });
+
+</script>
+
+</body>
+</html>
