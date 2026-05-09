@@ -5,6 +5,7 @@
 <title>For Sadiqa ❤️</title>
 
 <style>
+
 body {
   margin: 0;
   background: #0b141a;
@@ -12,6 +13,7 @@ body {
 }
 
 /* PASSWORD SCREEN */
+
 #lockScreen {
   position: fixed;
   width: 100%;
@@ -50,6 +52,7 @@ body {
 }
 
 /* CHAT UI */
+
 .chat-container {
   max-width: 400px;
   margin: auto;
@@ -63,6 +66,7 @@ body {
   color: white;
   padding: 15px;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .chat-box {
@@ -79,6 +83,7 @@ body {
   border-radius: 10px;
   font-size: 14px;
   position: relative;
+  word-wrap: break-word;
 }
 
 .sent {
@@ -96,14 +101,18 @@ body {
   font-size: 12px;
   margin-left: 10px;
   color: gray;
+  padding-bottom: 10px;
 }
+
 </style>
 </head>
 
 <body>
 
 <!-- PASSWORD SCREEN -->
+
 <div id="lockScreen">
+
   <h2>Enter Password ❤️</h2>
 
   <input type="password" id="password" placeholder="Enter password">
@@ -111,21 +120,30 @@ body {
   <button onclick="checkPassword()">Unlock</button>
 
   <div class="error" id="error"></div>
+
 </div>
 
 <!-- CHAT -->
+
 <div class="chat-container" id="chatContainer">
+
   <div class="header">Sadiqa ❤️</div>
 
   <div class="chat-box" id="chat"></div>
+
   <div class="typing" id="typing"></div>
+
 </div>
+
+<!-- MUSIC -->
 
 <audio id="bgm" loop>
   <source src="TumHiHo.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
+/* PASSWORD CHECK */
 
 function checkPassword() {
 
@@ -147,21 +165,60 @@ function checkPassword() {
   }
 }
 
+/* CHAT */
+
 let chat = document.getElementById("chat");
+
 let typing = document.getElementById("typing");
 
 let messages = [
+
   { text: "Hey Sadiqa… ❤️", type: "sent" },
+
   { text: "I was thinking about us today…", type: "sent" },
-  { text: "Every time I talk to you, my day gets a little better...❤️", type: "sent" },
-  { text: "i missing u", type: "sent" },
-  { text: "you are my favorite person ❤️", type: "sent" },
+
+  { text: "Every time I talk to you, my day gets a little better ❤️", type: "sent" },
+
+  { text: "I miss you so much 🥺", type: "sent" },
+
+  { text: "You are my favorite person ❤️", type: "sent" },
+
   { text: "I don’t say this everyday…", type: "sent" },
-  { text: "I really love you so much ❤️", type: "sent" },
-  { text: "And I always love u💫", type: "sent" }
+
+  { text: "But I really love you so much ❤️", type: "sent" },
+
+  { text: "And I always will… 💫", type: "sent" }
+
 ];
 
 let i = 0;
+
+/* TYPING EFFECT */
+
+function typeMessage(element, text, speed, callback) {
+
+  let j = 0;
+
+  function typingEffect() {
+
+    if (j < text.length) {
+
+      element.innerHTML += text.charAt(j);
+
+      j++;
+
+      setTimeout(typingEffect, speed);
+
+    } else {
+
+      if(callback) callback();
+    }
+  }
+
+  typingEffect();
+}
+
+/* SHOW MESSAGES */
 
 function showMessage() {
 
@@ -177,15 +234,17 @@ function showMessage() {
 
       msg.className = "message " + messages[i].type;
 
-      msg.innerHTML = messages[i].text;
-
       chat.appendChild(msg);
 
-      chat.scrollTop = chat.scrollHeight;
+      typeMessage(msg, messages[i].text, 50, () => {
 
-      i++;
+        chat.scrollTop = chat.scrollHeight;
 
-      showMessage();
+        i++;
+
+        setTimeout(showMessage, 1000);
+
+      });
 
     }, 1500);
   }
