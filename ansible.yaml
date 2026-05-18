@@ -1,5 +1,6 @@
 - name: Deploy WhatsApp App
-  hosts: web
+  hosts: local
+  connection: local
   become: yes
 
   tasks:
