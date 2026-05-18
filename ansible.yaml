@@ -29,3 +29,9 @@
       copy:
         src: script.js
         dest: /usr/share/nginx/html/script.js
+
+    - name: reStart nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: yes
