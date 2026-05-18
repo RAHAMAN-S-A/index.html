@@ -1,0 +1,31 @@
+- name: Deploy WhatsApp App
+  hosts: web
+  become: yes
+
+  tasks:
+
+    - name: Install nginx
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy index file
+      copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
+
+    - name: Copy CSS
+      copy:
+        src: style.css
+        dest: /usr/share/nginx/html/style.css
+
+    - name: Copy JS
+      copy:
+        src: script.js
+        dest: /usr/share/nginx/html/script.js
